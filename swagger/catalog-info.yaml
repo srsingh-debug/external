@@ -19,7 +19,7 @@ spec:
   owner: guests # Change this to your specific Backstage group (e.g., 'infrastructure' or 'nps-team')
   system: nps-system # Optional: group related components together
   definition:
-    $text: ./nps-popbo-openapi.json
+    $text: ./api.json
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -42,3 +42,12 @@ spec:
   system: nps-system
   providesApis:
     - nps-popbo-external-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: nps-system
+  title: NPS Ecosystem
+  description: System wrapper for NPS related services
+spec:
+  owner: guests
