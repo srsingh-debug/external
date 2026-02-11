@@ -1,10 +1,56 @@
+# apiVersion: backstage.io/v1alpha1
+# kind: Component
+# metadata:
+#   name: external
+#   annotations:
+#     github.com/project-slug: gajendrawits/external
+# spec:
+#   type: other
+#   lifecycle: unknown
+#   owner: finance-platform-team
+
+
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: nps-popbo-external-api
+  title: NPS POPBO External API Service
+  description: External API service for NPS POPBO integration with third-party services including Signzy, Protean, PRAN, PAN validation, and CKYC services.
+  tags:
+    - finance
+    - nps
+    - pension
+    - external-integration
+  links:
+    - url: https://uat-pop2.proteanx.io/api-gateway/externalapi
+      title: UAT Environment
+      icon: dashboard
+spec:
+  type: openapi
+  lifecycle: production
+  owner: guests # Change this to your specific Backstage group (e.g., 'infrastructure' or 'nps-team')
+  system: nps-system # Optional: group related components together
+  definition:
+    $text: ./nps-popbo-openapi.json
+
+---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: external
-  annotations:
-    github.com/project-slug: gajendrawits/external
+  name: nps-popbo-service
+  title: NPS POPBO Service
+  description: The backend service implementing the External NPS POPBO API.
+  tags:
+    - java
+    - backend
+    - nps
+  links:
+    - url: https://dev-pop2.proteanx.io/api-gateway/externalapi
+      title: Dev Environment
 spec:
-  type: other
-  lifecycle: unknown
-  owner: finance-platform-team
+  type: service
+  lifecycle: production
+  owner: guests # Change this to your specific Backstage group
+  system: nps-system
+  providesApis:
+    - nps-popbo-external-api
